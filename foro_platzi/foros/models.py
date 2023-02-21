@@ -1,12 +1,14 @@
+import uuid
 from django.db import models
 from forum_profile.models import UsersModel
 
 # Create your models here.
 class PostModel(models.Model):
     
-    id = models.UUIDField(primary_key=True, unique=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True)
     title = models.CharField(max_length=200)
     thematic = models.CharField(max_length=24, blank=True, null=True)
+    post_text = models.TextField(max_length=1000, default=None)
     pub_date = models.DateField(auto_now_add=True)
     mod_date = models.DateField(auto_now_add=True)
     user = models.ForeignKey(UsersModel, on_delete=models.CASCADE, blank=False, null=False)
@@ -16,7 +18,7 @@ class PostModel(models.Model):
     
 class CommentModel(models.Model):
     
-    id = models.UUIDField(primary_key=True, unique=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True)
     user = models.ForeignKey(UsersModel, on_delete=models.CASCADE)
     post = models.ForeignKey(PostModel, on_delete=models.CASCADE)
     original_comment = models.ForeignKey("CommentModel", on_delete=models.CASCADE, blank=True, null=True)
@@ -24,5 +26,5 @@ class CommentModel(models.Model):
     mod_date = models.DateField(auto_now_add=True)
     text_comment = models.TextField(max_length=500)
     
-    def __str__(self):
-        return self.text_comment
+    def __str__(self) -> str:
+        return self.text_comment[:30]
