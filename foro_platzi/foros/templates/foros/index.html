@@ -1,0 +1,12 @@
+{% if latest_posts %}
+    <ul>
+        {% for post in latest_posts %}
+        <li>
+            <h4><a href="#">{{ post.user.nickname }}</a> -- <a href="#">{{ post.title }}</a></h4>
+            <p>{{ post.post_text|truncatechars:50 }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No posts are available</p>
+{% endif %}
