@@ -15,15 +15,17 @@
         <p>{{ comment.text_comment }}</p>
     {% endfor %}
     <hr>
+    <form action="{% url 'foros:Foro_detalle' postmodel.id %}" method="POST">
+    {% csrf_token %}
     {% for field in form %}
-        <div class="fieldWrapper">
-            {{ field.errors }}
-            {{ field.label_tag }} {{ field }}
-            {% if field.help_text %}
-            <p class="help">{{ field.help_text|safe }}</p>
-            {% endif %}
-        </div>
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+        <input type="submit" value="OK">
     {% endfor %}
+    </form>
     {% else %}
     <p>Holan't</p>
 {% endif %}
