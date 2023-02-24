@@ -1,0 +1,8 @@
+{% if postmodel %}
+    <p>{{ postmodel.title }}</p>
+    {% for comment in postmodel.commentmodel_set.all %}
+        <p>{{ comment.text_comment }}</p>
+    {% endfor %}
+{% else %}
+    <p>Holan't</p>
+{% endif %}

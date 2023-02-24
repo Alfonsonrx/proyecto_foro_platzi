@@ -11,3 +11,13 @@ class IndexView(generic.ListView):
     
     def get_queryset(self):
         return PostModel.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:10]
+
+class ForumView(generic.DetailView):
+    model = PostModel
+    template_name = 'foros/forum.html'
+    
+    # def get_queryset(self):
+    #     return PostModel.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:10]
+
+# def forum_view(request, pk):
+#     template_name = "foros/forum.html"

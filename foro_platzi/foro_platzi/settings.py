@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 AUTH_USER_MODEL = "forum_profile.CustomUser"
 
 LOGIN_REDIRECT_URL="/"
+LOGIN_URL = '/user/login'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

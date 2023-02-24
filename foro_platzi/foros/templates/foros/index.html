@@ -2,7 +2,7 @@
     <ul>
         {% for post in latest_posts %}
         <li>
-            <h4><a href="#">{{ post.user.nickname }}</a> -- <a href="#">{{ post.title }}</a></h4>
+            <h4><a href="#">{{ post.user.nickname }}</a> -- <a href="{% url 'foros:Foro_detalle' post.id %}">{{ post.title }}</a></h4>
             <p>{{ post.post_text|truncatechars:50 }} - {{ post.pub_date|date }}</p>
         </li>
         {% endfor %}
