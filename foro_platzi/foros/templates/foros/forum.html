@@ -1,8 +1,29 @@
 {% if postmodel %}
-    <p>{{ postmodel.title }}</p>
+    <div>
+        <h1>{{ postmodel.title }}</h1>
+        <a>{{ postmodel.pub_date|date }}</a>
+    </div>
+    Thematic: <a href="#">{{ postmodel.thematic }}</a>
+    <p>{{ postmodel.post_text }}</p>
+    
     {% for comment in postmodel.commentmodel_set.all %}
+        <hr>
+        <div>
+            <h4>{{ comment.user.nickname }}</h4>
+            <a>{{ comment.pub_date|date }}</a>
+        </div>    
         <p>{{ comment.text_comment }}</p>
     {% endfor %}
-{% else %}
+    <hr>
+    {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.errors }}
+            {{ field.label_tag }} {{ field }}
+            {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }}</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+    {% else %}
     <p>Holan't</p>
 {% endif %}
