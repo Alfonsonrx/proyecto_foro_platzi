@@ -1,5 +1,15 @@
-<h1>My profile</h1>
-<p>
-    {{ object }}
-</p>
+
+{% if user.nickname == object.nickname %}
+<h1>My profile:{{ object.nickname }}</h1>
+{% else %}
+<h1>Profile of {{ object.nickname }}</h1>
+{% endif %}
+
+<p>Nombre: {{ object.name }}</p>
+<p>Correo: {{ object.email }}</p>
+<p>Fecha de registro: {{ object.date_joined|date }}</p>
+<p>Descripcion: {{ object.description }}</p>
+
+{% if user.nickname == object.nickname %}
 <a href="{% url 'forum_profile:logout' %}">Logout</a>
+{% endif %}

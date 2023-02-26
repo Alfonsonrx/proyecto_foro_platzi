@@ -1,7 +1,10 @@
+import datetime
+
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
+from django.contrib import admin
 
 from .managers import CustomUserManager
     
@@ -21,3 +24,24 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+    
+    # ...
+    @admin.display(
+        boolean=True,
+        # ordering='pub_date',
+        description='Active?',
+    )
+    def now_active(self):
+        return self.is_active
+    
+    def recently_joined(self):
+        now=timezone.now()
+        return now - datetime.timedelta(days=-15) <= self.date_joined <= now
+    
+    def time_active(self):
+        if self.is_active:
+            now=timezone.now()
+            delta = now - self.date_joined
+            return "{} days active".format(delta.days)
+        else:
+            return "Is not active"

@@ -2,7 +2,14 @@
     <ul>
         {% for post in latest_posts %}
         <li>
-            <h4><a href="#">{{ post.user.nickname }}</a> -- <a href="{% url 'foros:Foro_detalle' post.id %}">{{ post.title }}</a></h4>
+            <h3>
+                {% if user.nickname == post.user.nickname %}
+                    <a href="{% url 'forum_profile:self-profile' %}">{{ post.user.nickname }}</a> 
+                {% else %}
+                    <a href="{% url 'forum_profile:profile' post.user.nickname %}">{{ post.user.nickname }}</a> 
+                {% endif %}
+                -- 
+                <a href="{% url 'foros:Foro_detalle' post.id %}">{{ post.title }}</a></h3>
             <p>{{ post.post_text|truncatechars:50 }} - {{ post.pub_date|date }}</p>
         </li>
         {% endfor %}

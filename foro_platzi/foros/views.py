@@ -18,6 +18,9 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return PostModel.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:10]
 
+"""
+Comment Upload and Forum Details View
+"""
 class ForumGetView(generic.DetailView):
     model = PostModel
     template_name = 'foros/forum.html'
@@ -43,9 +46,6 @@ class CommentPostView(SingleObjectMixin,FormView):
         # self.object = self.get_object()
         return super().post(request, *args, **kwargs)
     
-    # def get_success_url(self):
-    #     return reverse('foros:Foro_detalle', kwargs={'pk': self.object.pk})
-    
 class ForumView(View):
 
     def get(self, request, *args, **kwargs):
@@ -61,3 +61,4 @@ class ForumView(View):
             form.save()
         # return redirect(reverse('foros:Foro_detalle',kwargs={'pk':self.kwargs['pk']}))
         return view(request,*args, **kwargs)
+
