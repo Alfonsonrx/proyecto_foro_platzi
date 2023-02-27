@@ -1,3 +1,4 @@
+
 {% if postmodel %}
     <div>
         <h1>{{ postmodel.title }}</h1>
@@ -19,13 +20,14 @@
     {% csrf_token %}
     {% for field in form %}
         {{ field.errors }}
-        {{ field.label_tag }} {{ field }}
+        {{ field.label_tag }} 
+        {{ field }}
         {% if field.help_text %}
         <p class="help">{{ field.help_text|safe }}</p>
         {% endif %}
         <input type="submit" value="OK">
     {% endfor %}
     </form>
-    {% else %}
+{% else %} 
     <p>Holan't</p>
 {% endif %}

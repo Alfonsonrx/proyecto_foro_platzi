@@ -4,11 +4,12 @@
 {% else %}
 <h1>Profile of {{ object.nickname }}</h1>
 {% endif %}
-
-<p>Nombre: {{ object.name }}</p>
-<p>Correo: {{ object.email }}</p>
-<p>Fecha de registro: {{ object.date_joined|date }}</p>
-<p>Descripcion: {{ object.description }}</p>
+<div>
+    <p>Nombre: {{ object.name }}</p>
+    <p>Correo: {{ object.email }}</p>
+    <p>Fecha de registro: {{ object.date_joined|date }}</p>
+    <p>Descripcion: {{ object.description }}</p>
+</div>
 
 {% if user.nickname == object.nickname %}
 <a href="{% url 'forum_profile:logout' %}">Logout</a>

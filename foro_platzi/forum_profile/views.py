@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.views.generic.detail import DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import CustomUserCreationForm
 from .models import CustomUser
@@ -10,8 +11,10 @@ class SelfUserView(DetailView):
     
     def get_object(self):
         return self.request.user
-class UserView(DetailView):
+
+class UserView(LoginRequiredMixin, DetailView):
     template_name = 'profile/user_profile.html'
+    login_url = '/user/login/'
     
     def get_object(self):
         self.user=get_object_or_404(CustomUser,nickname = self.kwargs['nickname'])

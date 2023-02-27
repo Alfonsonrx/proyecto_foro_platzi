@@ -1,16 +1,28 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'foro/main.css' %}">
+<div class="options">
+    <a href="{% url 'foros:crear_foro' %}">Agregar foro</a>
+    <a href="{% url 'forum_profile:self-profile' %}">Mi perfil</a>
+</div>
 {% if latest_posts %}
     <ul>
         {% for post in latest_posts %}
         <li>
-            <h3>
-                {% if user.nickname == post.user.nickname %}
+            <div class="ids_forum">
+                <h3>
+                    <!-- <a href="{% url 'forum_profile:profile' post.user.nickname %}">{{ post.user.nickname }}</a>  -->
+                    <a href="{% url 'foros:Foro_detalle' post.id %}" class="title">{{ post.title }}</a>
+                    <a>--</a>
+                    {% if user.nickname == post.user.nickname %}
                     <a href="{% url 'forum_profile:self-profile' %}">{{ post.user.nickname }}</a> 
-                {% else %}
+                    {% else %}
                     <a href="{% url 'forum_profile:profile' post.user.nickname %}">{{ post.user.nickname }}</a> 
-                {% endif %}
-                -- 
-                <a href="{% url 'foros:Foro_detalle' post.id %}">{{ post.title }}</a></h3>
-            <p>{{ post.post_text|truncatechars:50 }} - {{ post.pub_date|date }}</p>
+                    {% endif %}
+                </h3>
+            </div>
+            <div class="content_forum">
+                <p>{{ post.post_text|truncatechars:50 }} - {{ post.pub_date|date }}</p>
+            </div>
         </li>
         {% endfor %}
     </ul>

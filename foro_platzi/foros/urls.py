@@ -6,5 +6,6 @@ from . import views
 app_name = 'foros'
 urlpatterns = [
     path("", login_required(views.IndexView.as_view()), name="Index"),
-    path("foro/<uuid:pk>/", login_required(views.ForumView.as_view()), name="Foro_detalle"),
+    path("foro/<uuid:pk>/", views.ForumView.as_view(), name="Foro_detalle"),
+    path("crear_foro/", login_required(views.insert_forum), name="crear_foro"),
 ]
