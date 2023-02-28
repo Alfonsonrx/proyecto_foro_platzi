@@ -1,6 +1,50 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'foro/main.css' %}">
-<div class="options">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'foro/main.css' %}">
+    <title>Home</title>
+</head>
+<body>
+    <header>
+        <h1>Home foros</h1>
+    </header>
+    <div class="options">
+        <a href="{% url 'foros:crear_foro' %}">Agregar foro</a>
+        <a href="{% url 'forum_profile:self-profile' %}">Mi perfil</a>
+    </div>
+    {% if latest_posts %}
+        <ul>
+            {% for post in latest_posts %}
+            <li>
+                <div class="ids_forum">
+                    <h3>
+                        <a href="{% url 'foros:Foro_detalle' post.id %}" class="title">{{ post.title }}</a>
+                        <a>--</a>
+                        {% if user.nickname == post.user.nickname %}
+                        <a href="{% url 'forum_profile:self-profile' %}">{{ post.user.nickname }}</a> 
+                        {% else %}
+                        <a href="{% url 'forum_profile:profile' post.user.nickname %}">{{ post.user.nickname }}</a> 
+                        {% endif %}
+                    </h3>
+                </div>
+                <div class="content_forum">
+                    <p>{{ post.post_text|truncatechars:50 }}</p>
+                    <p>{{ post.pub_date|date }}</p>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No posts are available</p>
+    {% endif %}
+</body>
+</html>
+
+<!-- <div class="options">
     <a href="{% url 'foros:crear_foro' %}">Agregar foro</a>
     <a href="{% url 'forum_profile:self-profile' %}">Mi perfil</a>
 </div>
@@ -10,7 +54,6 @@
         <li>
             <div class="ids_forum">
                 <h3>
-                    <!-- <a href="{% url 'forum_profile:profile' post.user.nickname %}">{{ post.user.nickname }}</a>  -->
                     <a href="{% url 'foros:Foro_detalle' post.id %}" class="title">{{ post.title }}</a>
                     <a>--</a>
                     {% if user.nickname == post.user.nickname %}
@@ -28,4 +71,4 @@
     </ul>
 {% else %}
     <p>No posts are available</p>
-{% endif %}
+{% endif %} -->

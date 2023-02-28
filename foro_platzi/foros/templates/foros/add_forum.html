@@ -1,4 +1,39 @@
-<h1>Crear foro</h1>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'foro/detalle_foro.css' %}">
+    <link rel="stylesheet" href="{% static 'foro/forms.css' %}">
+    <title>Crear foro</title>
+</head>
+<body>
+    <h4><a href="{% url 'foros:Index' %}">Volver</a></h4>
+    <div class="formulario">
+        <h1>Crear foro</h1>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                {{ field.errors }}
+                <div class="component">
+                    {{ field.label_tag }}
+                    {{ field }}
+                </div>
+                {% if field.help_text %}
+                <p class="help">{{ field.help_text|safe }}</p>
+                {% endif %}
+            {% endfor %}
+            <div class="component">
+                <button type="submit">Crear</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+<!-- <h1>Crear foro</h1>
 <form method="post">
     {% csrf_token %}
     {% for field in form %}
@@ -10,4 +45,4 @@
         {% endif %}
     {% endfor %}
     <button type="submit">Crear</button>
-</form>
+</form> -->

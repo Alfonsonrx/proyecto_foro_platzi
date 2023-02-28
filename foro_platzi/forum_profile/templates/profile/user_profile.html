@@ -1,16 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'profile/main.css' %}">
+    <link rel="stylesheet" href="{% static 'foro/forms.css' %}">
+    {% if user.nickname == object.nickname %}
+    <title>Mi perfil</title>
+    {% else %}
+    <title>Perfil de: {{ object.nickname }}</title>
+    {% endif %}
+</head>
+<body>
+    <div class="formulario">
+        <h4><a href="{% url 'foros:Index' %}">Volver</a></h4>
+        <header>
+            {% if user.nickname == object.nickname %}
+            <h1>My profile: {{ object.nickname }}</h1>
+            {% else %}
+            <h1>Profile of {{ object.nickname }}</h1>
+            {% endif %}
+        </header>
+        <div class="descripcion">
+            <p>Nombre: {{ object.name }}</p>
+            <p>Correo: {{ object.email }}</p>
+            <p>Fecha de registro: {{ object.date_joined|date }}</p>
+            <p>Descripcion: {{ object.description }}</p>
+        </div>
+        
+        {% if user.nickname == object.nickname %}
+        <a href="{% url 'forum_profile:logout' %}">Logout</a>
+        {% endif %}
+    </div>
+</body>
+</html>
 
-{% if user.nickname == object.nickname %}
-<h1>My profile:{{ object.nickname }}</h1>
-{% else %}
-<h1>Profile of {{ object.nickname }}</h1>
-{% endif %}
-<div>
-    <p>Nombre: {{ object.name }}</p>
-    <p>Correo: {{ object.email }}</p>
-    <p>Fecha de registro: {{ object.date_joined|date }}</p>
-    <p>Descripcion: {{ object.description }}</p>
-</div>
-
-{% if user.nickname == object.nickname %}
-<a href="{% url 'forum_profile:logout' %}">Logout</a>
-{% endif %}
+<!-- <div class="formulario">
+    <header>
+        {% if user.nickname == object.nickname %}
+        <h1>My profile: {{ object.nickname }}</h1>
+        {% else %}
+        <h1>Profile of {{ object.nickname }}</h1>
+        {% endif %}
+    </header>
+    <div class="descripcion">
+        <p>Nombre: {{ object.name }}</p>
+        <p>Correo: {{ object.email }}</p>
+        <p>Fecha de registro: {{ object.date_joined|date }}</p>
+        <p>Descripcion: {{ object.description }}</p>
+    </div>
+    
+    {% if user.nickname == object.nickname %}
+    <a href="{% url 'forum_profile:logout' %}">Logout</a>
+    {% endif %}
+</div> -->

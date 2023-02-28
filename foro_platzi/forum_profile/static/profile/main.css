@@ -1,0 +1,39 @@
+*  {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    color: white;
+}
+
+body,form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+    background: hsl(196, 100%, 5%);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header,a{
+    font-size: 20px;
+
+    display: flex;
+    background: linear-gradient(
+        to right,
+        hsl(115, 100%, 62%),
+        hsl(204, 100%, 59%)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    
+    margin: 0 30px;
+}
+
+.descripcion p,a{
+    padding-top: 20px;
+}
