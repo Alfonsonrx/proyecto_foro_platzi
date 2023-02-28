@@ -116,3 +116,7 @@ li:hover{
     color: white;
     text-decoration: none;
 }
+
+.no-posts {
+    color: red;
+}

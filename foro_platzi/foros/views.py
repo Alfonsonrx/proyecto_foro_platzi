@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
 from django.views import generic, View
@@ -7,10 +7,14 @@ from django.http import HttpResponseForbidden
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+
 from .models import PostModel,CommentModel
 from .forms import CommentForm, ForumForm
 
 # Create your views here.
+def page_not_found_view(request, exception):
+    return render(request, 'foros/404.html', status=404)
+
 class IndexView(LoginRequiredMixin, generic.ListView):
     login_url = '/user/login/'
     template_name = "foros/index.html"

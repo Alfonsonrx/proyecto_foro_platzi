@@ -21,3 +21,5 @@ urlpatterns = [
     path('', include("foros.urls")),
     path('user/', include("forum_profile.urls"))
 ]
+
+handler404 = 'foros.views.page_not_found_view'
