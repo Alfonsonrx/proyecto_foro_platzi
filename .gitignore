@@ -1,2 +1,3 @@
 venv/
 foro_platzi/db.sqlite3
+foro_platzi/**/migrations/
