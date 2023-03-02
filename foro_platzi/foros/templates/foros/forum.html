@@ -25,16 +25,21 @@
         </div>
         
         <div class="comments">
-            <h3>Comentarios</h3>
-            {% for comment in postmodel.commentmodel_set.all %}
-                <div class="comment">
-                    <a>
-                        <h4> <a href="{% url 'forum_profile:profile' comment.user.nickname %}">{{ comment.user.nickname }}</a></h4>
-                    </a>
-                    {{ comment.pub_date|date }}
-                    <p>{{ comment.text_comment }}</p>
-                </div>    
-            {% endfor %}
+            {% if postmodel.commentmodel_set.count != 0 %}
+                <h3>Comentarios</h3>
+                {% for comment in postmodel.commentmodel_set.all %}
+                    <div class="comment">
+                        <a>
+                            <h4> <a href="{% url 'forum_profile:profile' comment.user.nickname %}">{{ comment.user.nickname }}</a></h4>
+                        </a>
+                        {{ comment.pub_date|date }}
+                        <p>{{ comment.text_comment }}</p>
+                    </div>    
+                {% endfor %}
+            {% else %}
+                <p class="no-exists">There  are no comments yet!</p>
+            {% endif %}
+
         </div>
         <form action="{% url 'foros:Foro_detalle' postmodel.id %}" method="POST">
         {% csrf_token %}
