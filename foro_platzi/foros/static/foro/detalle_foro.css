@@ -75,3 +75,19 @@ form {
     
     transition: 1s;
 }
+
+.fecha{
+    font-size: 15px;
+}
+
+.datos_usuario {
+    display: flex;
+}
+
+.datos_usuario p {
+    margin-left: 10px;
+}
+
+.no-exists {
+    color: red !important;
+}

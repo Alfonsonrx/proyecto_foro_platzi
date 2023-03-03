@@ -21,11 +21,8 @@ class IndexView(LoginRequiredMixin, generic.ListView):
     context_object_name = "latest_posts"
     
     def get_queryset(self):
-        return PostModel.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:10]
+        return PostModel.objects.filter(user__is_active=True ,pub_date__lte=timezone.now()).order_by('-pub_date')[:10]
 
-"""
-Comment Upload and Forum Details View
-"""
 class ForumGetView(generic.DetailView):
     model = PostModel
     template_name = 'foros/forum.html'
