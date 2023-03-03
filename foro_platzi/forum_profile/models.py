@@ -15,7 +15,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     description = models.TextField(blank=True, null=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    date_joined = models.DateTimeField(default=timezone.now)
+    date_joined = models.DateTimeField(auto_now_add=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["nickname"]
@@ -36,7 +36,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     
     def recently_joined(self):
         now=timezone.now()
-        return now - datetime.timedelta(days=-15) <= self.date_joined <= now
+        return now - datetime.timedelta(days=15) <= self.date_joined <= now
     
     def time_active(self):
         if self.is_active:
